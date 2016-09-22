@@ -1,5 +1,9 @@
 # ApiAuth
 
+## Forked
+
+This forked version adds back the `with_http_method` option and defaults it to `false`.
+
 [![Build Status](https://travis-ci.org/mgomes/api_auth.png?branch=master)](https://travis-ci.org/mgomes/api_auth)
 
 ## IMPORTANT: v2.0.0 is backwards incompatible with the default settings of v1.x to address a security vulnerability. See [CHANGELOG.md](/CHANGELOG.md) for security update information.
