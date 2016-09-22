@@ -109,7 +109,7 @@ describe 'ApiAuth' do
     end
 
     it 'fails to validate if the request method differs' do
-      canonical_string = ApiAuth::Headers.new(request).canonical_string('POST')
+      canonical_string = ApiAuth::Headers.new(request).canonical_string(override_http_method: 'POST', with_http_method: true)
       signature = hmac('123', request, canonical_string)
       request['Authorization'] = "APIAuth 1044:#{signature}"
       expect(ApiAuth.authentic?(request, '123')).to eq false

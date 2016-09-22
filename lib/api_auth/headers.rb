@@ -47,18 +47,20 @@ module ApiAuth
       @request.timestamp
     end
 
-    def canonical_string(override_method = nil)
-      request_method = override_method || @request.http_method
+    def canonical_string(options = {})
+      request_method = options[:override_http_method] || @request.http_method
 
       if request_method.nil?
         raise ArgumentError, 'unable to determine the http method from the request, please supply an override'
       end
 
-      [request_method.upcase,
-       @request.content_type,
-       @request.content_md5,
-       parse_uri(@request.request_uri),
-       @request.timestamp].join(',')
+      parts = [@request.content_type,
+               @request.content_md5,
+               parse_uri(@request.request_uri),
+               @request.timestamp]
+               
+      parts.unshift request_method if options[:with_http_method]
+      parts.join(',')
     end
 
     # Returns the authorization header from the request's headers
